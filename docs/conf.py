@@ -121,7 +121,8 @@ html_theme = 'alabaster'
 html_theme_options = {
         'logo': 'BloomLogo.jpg',
         'logo_name': 'true',
-        'description': 'Visualize deep mutational scanning on protein structure.',
+        'description': 'Visualize deep mutational scanning '
+                       'on protein structure.',
         'github_button': 'true',
         'github_user': 'jbloomlab',
         'github_repo': 'dms_struct',
@@ -203,6 +204,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
     (master_doc, 'dms_struct', u'dms_struct Documentation',
-     author, 'dms_struct', 'Visualize deep mutational scanning on protein structure.',
+     author, 'dms_struct', 'Visualize deep mutational scanning '
+                           'on protein structure.',
      'Miscellaneous'),
     ]
