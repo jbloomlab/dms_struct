@@ -1,4 +1,4 @@
-sphinx
-sphinx-argparse
-sphinx_gallery
-nb2plots
+sphinx>=2.0
+sphinx-argparse>=0.2.5
+sphinx_gallery>=0.3.1
+nb2plots>=0.6

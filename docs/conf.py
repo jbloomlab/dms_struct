@@ -28,7 +28,7 @@ sys.path.insert(0, '{0}/..'.format(os.path.abspath('.')))
 
 # If your documentation needs a minimal Sphinx version, state it here.
 #
-# needs_sphinx = '1.0'
+needs_sphinx = '2.0'
 
 numfig = False
 
@@ -41,6 +41,7 @@ extensions = [
         'sphinx.ext.mathjax',
         'sphinx.ext.githubpages',
         'sphinx.ext.viewcode',
+        'sphinx.ext.napoleon',
         'nb2plots',
         ]
 

@@ -24,7 +24,7 @@ If you aren't sure about pull requests:
 
 Tests and documentation
 +++++++++++++++++++++++
-You should document your code as described in the `Google style guide <https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html>`_.
+You should document your code clearly with `numpy style documentation`_.
 You may also want to write sphinx_ documentation / examples in docs_ for major new functionality, although this is not usually necessary for small changes.
 
 You should add tests.
@@ -122,3 +122,4 @@ Note that this requires you to have registered the package on PyPI_ if this is t
 .. _`__init__.py`: dms_struct/__init__.py
 .. _CHANGELOG: CHANGELOG.rst
 .. _twine: https://github.com/pypa/twine
+.. _`numpy style documentation`: https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_numpy.html
