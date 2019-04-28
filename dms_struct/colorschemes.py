@@ -229,7 +229,8 @@ class ValueToColorMap:
 
         ax.imshow(colors,
                   aspect='auto',
-                  extent=extent)
+                  extent=extent,
+                  origin='lower')
 
         if label:
             if orientation == 'vertical':
