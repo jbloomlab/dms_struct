@@ -9,7 +9,10 @@ Editing the project
 
 Package structure
 ++++++++++++++++++
-The code is in `dms_struct <dms_struct>`_, the docs are in docs_, and unit tests are in tests_.
+- Package code is in `dms_struct <dms_struct>`_
+- Docs are in docs_
+- `Jupyter notebooks`_ are in notebooks_
+- Unit tests are in tests_
 
 Modify the code via pull requests
 +++++++++++++++++++++++++++++++++++
@@ -25,12 +28,13 @@ If you aren't sure about pull requests:
 Tests and documentation
 +++++++++++++++++++++++
 You should document your code clearly with `numpy style documentation`_.
-You may also want to write sphinx_ documentation / examples in docs_ for major new functionality, although this is not usually necessary for small changes.
+You may also want to write sphinx_ documentation / examples in docs_ or the notebooks_ to demonstrate larger-scale functionality.
 
 You should add tests.
 For simple things, these can be `doctests <https://docs.python.org/3/library/doctest.html>`_ in the code.
-For more elaborate functionality, put a unit test in tests_.
-
+For more elaborate functionality, put unit tests in tests_.
+Note also that the `Jupyter notebooks`_ in notebooks_ are tested via nbval_.
+If you are getting errors on these notebook tests due to testing cells that output objects that can't be properly tested (such as widgets), see the *nbval-ignore-output* tag option discussed in the nbval_ docs.
 
 Versions and CHANGELOG
 ++++++++++++++++++++++
@@ -119,7 +123,10 @@ Note that this requires you to have registered the package on PyPI_ if this is t
 .. _sphinx: https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html
 .. _tests: tests
 .. _docs: docs
+.. _notebooks: notebooks
+.. _`Jupyter notebooks`: https://jupyter.org/
 .. _`__init__.py`: dms_struct/__init__.py
 .. _CHANGELOG: CHANGELOG.rst
 .. _twine: https://github.com/pypa/twine
 .. _`numpy style documentation`: https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_numpy.html
+.. _nbval: https://nbval.readthedocs.io
