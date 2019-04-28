@@ -44,6 +44,10 @@ setup(
     long_description=readme,
     license='GPLv3',
     install_requires=[
+                      'matplotlib>=3.0.2',
+                      'nglview>=1.2',
+                      'numpy>=1.15.4',
+                      'pandas>=0.24.2',
                       ],
     platforms='Linux and Mac OS X.',
     packages=['dms_struct'],
