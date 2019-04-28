@@ -42,13 +42,15 @@ extensions = [
         'sphinx.ext.githubpages',
         'sphinx.ext.viewcode',
         'sphinx.ext.napoleon',
-        'nb2plots',
+        'matplotlib.sphinxext.plot_directive',
         ]
 
-# avoid cropping of plots included using nbplot
-# directive along lines described here:
+# configuration to matplotlib.sphinxext.plot_directive
+plot_include_source = True
+plot_html_show_source_link = False
 # https://github.com/matplotlib/matplotlib/issues/4563#issuecomment-381366101
-nbplot_rcparams = {'savefig.bbox': 'tight'}
+plot_rcparams = {'savefig.bbox': 'tight'}
+plot_apply_rcparams = True
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
