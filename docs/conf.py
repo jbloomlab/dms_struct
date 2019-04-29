@@ -43,6 +43,8 @@ extensions = [
         'sphinx.ext.viewcode',
         'sphinx.ext.napoleon',
         'matplotlib.sphinxext.plot_directive',
+        'nbsphinx',
+        'nbsphinx_link',
         ]
 
 # configuration to matplotlib.sphinxext.plot_directive
@@ -101,7 +103,7 @@ language = None
 # directories to ignore when looking for source files.
 # This patterns also effect to html_static_path and html_extra_path
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', 'README.rst',
-                    'doc_requirements.txt']
+                    'doc_requirements.txt', '**.ipynb_checkpoints']
 
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'
