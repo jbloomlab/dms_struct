@@ -1,0 +1,6 @@
+numpy==1.15.4
+nglview==1.2.2
+setuptools==40.6.2
+pandas==0.24.2
+matplotlib==3.0.2
+pyyaml==3.13
