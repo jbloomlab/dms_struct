@@ -45,7 +45,7 @@ setup(
     license='GPLv3',
     install_requires=[
                       'matplotlib>=3.0.2',
-                      'nglview>=1.2',
+                      'nglview>=1.2.2',
                       'numpy>=1.15.4',
                       'pandas>=0.24.2',
                       'pyyaml>=3.13',
