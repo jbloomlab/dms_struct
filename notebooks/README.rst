@@ -1,7 +1,7 @@
 =================
 Jupyter notebooks
 =================
-`Jupyter notebook`_ demonstrating use of the package.
+`Jupyter notebooks`_ demonstrating use of the package.
 
 These are tested against their current results using nbval_.
 
