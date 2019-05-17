@@ -93,12 +93,17 @@ def colored_struct(*,
                          '`prop_df`. For each chain and site, entries must '
                          f"be the same for all rows in these columns: {cols}")
 
-    # get PDB into a widget
+    # get PDB into a widget; use `default_representation=False` as here:
+    # https://github.com/arose/nglview/issues/802#issuecomment-492760630
     if os.path.isfile(pdb):
-        w = nglview.show_structure_file(pdb)
+        w = nglview.show_structure_file(pdb,
+                                        default_representation=False,
+                                        )
     else:
         try:
-            w = nglview.show_pdbid(pdb)
+            w = nglview.show_pdbid(pdb,
+                                   default_representation=False,
+                                   )
         except HTTPError:  # noqa: F821
             raise ValueError(f"`pdb` {pdb} does not specify an existing "
                              'PDB file or an ID that can be downloaded')
@@ -128,15 +133,20 @@ def colored_struct(*,
     highlight_selection = ', '.join(highlight_selectionlist)
     highlight_colorscheme = nglview.color._ColorScheme(highlight_colorscheme)
 
-    # color and style the widget
+    # color and style widget; set assembly to BU1 (biological unit 1) as here:
+    # https://github.com/arose/ngl/blob/master/doc/usage/selection-language.md
     w.clear_representations()
     w.add_representation(representation,
                          selection=selection,
-                         color=colorscheme)
+                         color=colorscheme,
+                         assembly='BU1',
+                         )
     if highlight_representation and highlight_selection:
         w.add_representation(highlight_representation,
                              selection=highlight_selection,
-                             color=highlight_colorscheme)
+                             color=highlight_colorscheme,
+                             assembly='BU1',
+                             )
 
     if orientation:
         if len(orientation) != 16:
