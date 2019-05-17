@@ -7,4 +7,8 @@ The easiest way to install ``dms_struct`` is from `PyPI <https://pypi.org/>`_ us
 
     pip install dms_struct
 
-The source code for ``dms_struct`` is available on GitHub at https://github.com/`the Bloom lab <https://research.fhcrc.org/bloom/en.html>`_/dms_struct.
+You will then need to activate ``nglview`` with::
+
+    jupyter-nbextension enable nglview --py --sys-prefix    
+
+The source code for ``dms_struct`` is available on GitHub at https://github.com/jbloomlab/dms_struct.
