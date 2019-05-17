@@ -13,6 +13,7 @@ Package structure
 - Docs are in docs_
 - `Jupyter notebooks`_ are in notebooks_
 - Unit tests are in tests_
+- The configuration for mybinder_ is in binder_ (see README in that subdirectory for more details)
 
 Modify the code via pull requests
 +++++++++++++++++++++++++++++++++++
@@ -130,3 +131,5 @@ Note that this requires you to have registered the package on PyPI_ if this is t
 .. _twine: https://github.com/pypa/twine
 .. _`numpy style documentation`: https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_numpy.html
 .. _nbval: https://nbval.readthedocs.io
+.. _binder: binder
+.. _mybinder: https://mybinder.org/
