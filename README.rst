@@ -8,6 +8,9 @@ dms_struct
 .. image:: https://img.shields.io/travis/jbloomlab/dms_struct.svg
         :target: https://travis-ci.org/jbloomlab/dms_struct
 
+.. image:: https://mybinder.org/badge_logo.svg
+        :target: https://mybinder.org/v2/gh/jbloomlab/dms_struct/master?filepath=notebooks
+
 Visualize deep mutational scanning on protein structure.
 
 ``dms_struct`` is a Python package written by `the Bloom lab <https://research.fhcrc.org/bloom/en.html>`_.
