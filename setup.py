@@ -48,7 +48,7 @@ setup(
                       'nglview>=1.2.2',
                       'numpy>=1.15.4',
                       'pandas>=0.24.2',
-                      'pyyaml>=3.13',
+                      'pyyaml>=4.2b1',
                       ],
     platforms='Linux and Mac OS X.',
     packages=['dms_struct'],
