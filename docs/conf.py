@@ -28,7 +28,7 @@ sys.path.insert(0, '{0}/..'.format(os.path.abspath('.')))
 
 # If your documentation needs a minimal Sphinx version, state it here.
 #
-# needs_sphinx = '1.0'
+needs_sphinx = '2.0'
 
 numfig = False
 
@@ -41,13 +41,18 @@ extensions = [
         'sphinx.ext.mathjax',
         'sphinx.ext.githubpages',
         'sphinx.ext.viewcode',
-        'nb2plots',
+        'sphinx.ext.napoleon',
+        'matplotlib.sphinxext.plot_directive',
+        'nbsphinx',
+        'nbsphinx_link',
         ]
 
-# avoid cropping of plots included using nbplot
-# directive along lines described here:
+# configuration to matplotlib.sphinxext.plot_directive
+plot_include_source = True
+plot_html_show_source_link = False
 # https://github.com/matplotlib/matplotlib/issues/4563#issuecomment-381366101
-nbplot_rcparams = {'savefig.bbox': 'tight'}
+plot_rcparams = {'savefig.bbox': 'tight'}
+plot_apply_rcparams = True
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -98,7 +103,7 @@ language = None
 # directories to ignore when looking for source files.
 # This patterns also effect to html_static_path and html_extra_path
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', 'README.rst',
-                    'doc_requirements.txt']
+                    'doc_requirements.txt', '**.ipynb_checkpoints']
 
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'
