@@ -1,0 +1,10 @@
+#!/bin/bash
+
+for nb in *.ipynb; do
+    jupyter nbconvert \
+    --ClearOutputPreprocessor.enabled=True \
+    --inplace \
+    $nb
+done
+
+exec "$@"

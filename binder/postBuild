@@ -1,3 +1,5 @@
+#!/bin/bash
+
 jupyter-nbextension enable nglview --py --sys-prefix
 jupyter contrib nbextension install --sys-prefix
 jupyter nbextension enable toc2/main
