@@ -8,6 +8,7 @@ Get `nglview <https://github.com/arose/nglview>`_ protein structure widgets.
 
 
 import os
+import secrets
 
 import nglview
 
@@ -129,9 +130,17 @@ def colored_struct(*,
     selection = ', '.join(selectionlist)
     if show_other:
         selection = f"({show_other}) or ({selection})"
-    colorscheme = nglview.color._ColorScheme(colorscheme)
+    # uniquely label color schemes as here:
+    # https://github.com/arose/nglview/issues/802#issuecomment-492501051
+    colorscheme = nglview.color._ColorScheme(
+                                colorscheme,
+                                label=f"colorscheme_{secrets.token_hex(10)}",
+                                )
     highlight_selection = ', '.join(highlight_selectionlist)
-    highlight_colorscheme = nglview.color._ColorScheme(highlight_colorscheme)
+    highlight_colorscheme = nglview.color._ColorScheme(
+                                highlight_colorscheme,
+                                label=f"colorscheme_{secrets.token_hex(10)}",
+                                )
 
     # color and style widget; set assembly to BU1 (biological unit 1) as here:
     # https://github.com/arose/ngl/blob/master/doc/usage/selection-language.md

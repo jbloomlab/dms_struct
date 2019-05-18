@@ -9,8 +9,10 @@ python:
 cache: pip
 
 install:
-  - pip install -r test_requirements.txt
+  - pip install git+https://github.com/arose/nglview
   - pip install -e .
+  - pip install -r test_requirements.txt
+  - jupyter-nbextension enable nglview --py --sys-prefix
 
 script: 
   - flake8
