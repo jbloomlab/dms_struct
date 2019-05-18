@@ -10,6 +10,7 @@ _temp*
 *.pyc
 docs/dms_struct.*
 docs/_build
+notebooks/structure_images
 
 __pycache__
 build

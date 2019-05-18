@@ -9,6 +9,7 @@ Get `nglview <https://github.com/arose/nglview>`_ protein structure widgets.
 
 import os
 import secrets
+from urllib.error import HTTPError
 
 import nglview
 
