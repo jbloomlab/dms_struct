@@ -1,6 +1,9 @@
+dmslogo==0.2.3
+iPython==7.2.0
+ipywidgets==7.4.2
 jupyter_contrib_nbextensions==0.5.0
 matplotlib==3.0.2
-nglview==1.2.2
+nglview==2.0
 numpy==1.15.4
 pandas==0.24.2
 pyyaml==5.1
