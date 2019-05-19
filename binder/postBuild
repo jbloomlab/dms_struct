@@ -3,3 +3,5 @@
 jupyter-nbextension enable nglview --py --sys-prefix
 jupyter contrib nbextension install --sys-prefix
 jupyter nbextension enable toc2/main
+jupyter nbextension enable --py --sys-prefix appmode
+jupyter serverextension enable --py --sys-prefix appmode
