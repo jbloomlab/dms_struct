@@ -3,7 +3,7 @@
 
 ``dms_struct`` is a Python package written by `the Bloom lab <https://research.fhcrc.org/bloom/en.html>`_ to view `deep mutational scanning`_ and `mutational antigenic profiling`_ data on protein structures.
 
-``dms_struct`` is largely a collection of code that simplifies the use of nglview_ to create the desired visualizations in a `Jupyter notebook`_.
+``dms_struct`` is essentially a collection of code that simplifies the use of nglview_ to visualize selection on protein structures in a `Jupyter notebook`_.
 
 See below for information and examples of how to use this package.
 

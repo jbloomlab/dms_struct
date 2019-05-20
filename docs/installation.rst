@@ -11,6 +11,6 @@ The above command will automatically install nglview_, which you then need to ac
 
     jupyter-nbextension enable nglview --py --sys-prefix    
 
-The source code for ``dms_struct`` is available on GitHub at https://github.com/jbloomlab/dms_struct.
+If you want to install from source, the source code for ``dms_struct`` is available on GitHub at https://github.com/jbloomlab/dms_struct.
 
 .. _nglview: https://github.com/arose/nglview
