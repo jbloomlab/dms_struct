@@ -1,0 +1,180 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>struct_widget &#8212; dms_struct 0.1.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="package index" href="package_index.html" />
+    <link rel="prev" title="colorschemes" href="dms_struct.colorschemes.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <span class="target" id="module-dms_struct.struct_widget"></span><div class="section" id="struct-widget">
+<h1>struct_widget<a class="headerlink" href="#struct-widget" title="Permalink to this headline">¶</a></h1>
+<p>Get <a class="reference external" href="https://github.com/arose/nglview">nglview</a> protein structure widgets.</p>
+<dl class="function">
+<dt id="dms_struct.struct_widget.colored_struct">
+<code class="descclassname">dms_struct.struct_widget.</code><code class="descname">colored_struct</code><span class="sig-paren">(</span><em>*</em>, <em>pdb</em>, <em>prop_df</em>, <em>chain_col='chain'</em>, <em>site_col='site'</em>, <em>color_col='color'</em>, <em>representation='cartoon'</em>, <em>highlight_col=None</em>, <em>highlight_representation='spacefill'</em>, <em>show_other=False</em>, <em>other_color='#FFFFFF'</em>, <em>orientation=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dms_struct/struct_widget.html#colored_struct"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dms_struct.struct_widget.colored_struct" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create widget showing a colored structure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pdb</strong> (<em>str</em>) – Existing PDB file, or ID to be downloaded from PDB.</p></li>
+<li><p><strong>prop_df</strong> (<em>pandas DataFrame</em>) – Data on sites to show and how to color them. You are responsible for
+ensuring that chaing / site labels are consistent with those in <cite>pdb</cite>,
+no automatic checks of this are performed.</p></li>
+<li><p><strong>chain_col</strong> (<em>str</em>) – Column in <cite>prop_df</cite> with PDB chain ID.</p></li>
+<li><p><strong>site_col</strong> (<em>str</em>) – Column in <cite>prop_df</cite> with PDB site numbers.</p></li>
+<li><p><strong>color_col</strong> (<em>str</em>) – Column in <cite>prop_df</cite> with color for each site.</p></li>
+<li><p><strong>representation</strong> (<em>str</em>) – <p>Protein representation (e.g., ‘cartoon’, ‘surface’, ‘spacefill’,
+or other <a class="reference external" href="https://github.com/arose/nglview">nglview</a> representation.</p>
+</p></li>
+<li><p><strong>highlight_col</strong> (str or <cite>None</cite>) – Optional column of boolean values in <cite>prop_df</cite> indicating
+sites to also draw in <cite>highlight_representation</cite>.</p></li>
+<li><p><strong>highlight_representation</strong> (<em>str</em>) – Additional representation for sites specified in <cite>highlight_col</cite>.</p></li>
+<li><p><strong>show_other</strong> (<cite>False</cite> or str) – Show selections <strong>not</strong> listed as sites in <cite>prop_df</cite>? If so, specify
+those selections. Can be ‘all’, ‘protein’, or other selection string
+(<a class="reference external" href="https://github.com/arose/ngl/tree/master/doc/usage">see here</a>).</p></li>
+<li><p><strong>other_color</strong> (<em>str</em>) – Color for any sites not in <cite>prop_df</cite> but shown via <cite>show_other</cite>.</p></li>
+<li><p><strong>orientation</strong> (<cite>None</cite> or list of 16 numbers) – Orientation to show the structure, can be obtained via the
+<cite>_camera_orientation</cite> property of a structure widget
+(<a class="reference external" href="https://github.com/arose/nglview/issues/785#issuecomment-487409212">https://github.com/arose/nglview/issues/785#issuecomment-487409212</a>).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The widget can be shown in a Jupyter notebook.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>nglview.widget.NGLWidget</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="index.html">
+    <img class="logo" src="_static/BloomLogo.jpg" alt="Logo"/>
+    
+    <h1 class="logo logo-name">dms_struct</h1>
+    
+  </a>
+</p>
+
+
+
+<p class="blurb">Visualize deep mutational scanning on protein structure.</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=jbloomlab&repo=dms_struct&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+    
+
+<p>
+<a href="https://travis-ci.org/jbloomlab/dms_struct">
+    <img
+        alt="https://secure.travis-ci.org/jbloomlab/dms_struct.svg?branch=master"
+        src="https://secure.travis-ci.org/jbloomlab/dms_struct.svg?branch=master"
+    />
+</a>
+</p>
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">dms_struct documentation</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="dms_struct.html">dms_struct package</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="dms_struct.html#dms-struct">dms_struct</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="dms_struct.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="package_index.html">package index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="acknowledgments.html">Acknowledgements</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="dms_struct.html">dms_struct package</a><ul>
+      <li>Previous: <a href="dms_struct.colorschemes.html" title="previous chapter">colorschemes</a></li>
+      <li>Next: <a href="package_index.html" title="next chapter">package index</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019--2019.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.0.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/dms_struct.struct_widget.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+    <a href="https://github.com/jbloomlab/dms_struct" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

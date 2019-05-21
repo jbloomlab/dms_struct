@@ -1,0 +1,16 @@
+dms\_struct package
+===================
+
+.. automodule:: dms_struct
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+
+   dms_struct.colorschemes
+   dms_struct.struct_widget
+

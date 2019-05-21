@@ -1,0 +1,192 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Examples &#8212; dms_struct 0.1.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="dms_struct package" href="dms_struct.html" />
+    <link rel="prev" title="Installation" href="installation.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="examples">
+<h1>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#how-to-run-the-examples" id="id1">How to run the examples</a></p></li>
+<li><p><a class="reference internal" href="#creating-structure-widgets" id="id2">Creating structure widgets</a></p></li>
+<li><p><a class="reference internal" href="#interactive-visualization-and-static-image-of-mutational-antigenic-profiling-data" id="id3">Interactive visualization and static image of mutational antigenic profiling data</a></p></li>
+</ul>
+</div>
+<div class="section" id="how-to-run-the-examples">
+<h2><a class="toc-backref" href="#id1">How to run the examples</a><a class="headerlink" href="#how-to-run-the-examples" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">dms_struct</span></code> uses <a class="reference external" href="https://github.com/arose/nglview">nglview</a> to create interactive structure widgets in a <a class="reference external" href="https://jupyter.org/">Jupyter notebook</a>.
+These structure widgets are rendered in a browser.
+Therefore, you need to run them interactively by opening <a class="reference external" href="https://jupyter.org/">Jupyter notebook</a>.</p>
+<p>To make this easy, the examples below are provided as links to <a class="reference external" href="https://mybinder.org/">mybinder</a> interactive notebooks.
+Once you have opened the notebooks in <a class="reference external" href="https://mybinder.org/">mybinder</a>, you may have to wait a minute for everything to load.
+When the notebooks load, they will show some existing output–but the structure widgets will not be properly rendered.
+To get them to render, you need to re-run the notebooks.
+Furthermore, they take some time to render, so run the notebooks <strong>cell-by-cell</strong> to allow time for each widget to render.</p>
+</div>
+<div class="section" id="creating-structure-widgets">
+<h2><a class="toc-backref" href="#id2">Creating structure widgets</a><a class="headerlink" href="#creating-structure-widgets" title="Permalink to this headline">¶</a></h2>
+<p>This example shows how to use <a class="reference internal" href="dms_struct.struct_widget.html#dms_struct.struct_widget.colored_struct" title="dms_struct.struct_widget.colored_struct"><code class="xref py py-func docutils literal notranslate"><span class="pre">dms_struct.struct_widget.colored_struct()</span></code></a> to create appropriately colored <a class="reference external" href="https://github.com/arose/nglview">nglview</a> structure widgets.
+<a class="reference external" href="https://mybinder.org/v2/gh/jbloomlab/dms_struct/master?filepath=notebooks/struct_widget.ipynb">Click here</a> to open the example in <a class="reference external" href="https://mybinder.org/">mybinder</a>.</p>
+</div>
+<div class="section" id="interactive-visualization-and-static-image-of-mutational-antigenic-profiling-data">
+<h2><a class="toc-backref" href="#id3">Interactive visualization and static image of mutational antigenic profiling data</a><a class="headerlink" href="#interactive-visualization-and-static-image-of-mutational-antigenic-profiling-data" title="Permalink to this headline">¶</a></h2>
+<p>This example shows how to analyze a real data set in order to create both an interactive visualization and a static image appropriate for a paper figure.
+It shows mutational antigenic profiling of the immune selection from influenza sera.</p>
+<p>The notebook is designed so that it is possible to visualize the results as an interactive app using <a class="reference external" href="https://github.com/oschuett/appmode">appmode</a>; this app can then be directly provided as a link to allow people to interactively view the structures.</p>
+<p>First, <a class="reference external" href="https://mybinder.org/v2/gh/jbloomlab/dms_struct/master?urlpath=%2Fapps%2Fnotebooks/flu_sera_map.ipynb">click here</a> to visualize in <a class="reference external" href="https://github.com/oschuett/appmode">appmode</a> (you may have to wait a minute for it to load).
+Note how the structures are interactive, and can be rotated and clicked on to get site numbers.</p>
+<p>To look at the actual notebook (<strong>not</strong> in <a class="reference external" href="https://github.com/oschuett/appmode">appmode</a>), <a class="reference external" href="https://mybinder.org/v2/gh/jbloomlab/dms_struct/master?filepath=notebooks/flu_sera_map.ipynb">click here</a>.
+You can run the actual notebook cell-by-cell (wait for widgets to render before going to then next cell!) and the notebook will also produce a static image that can be used as a figure (to view that figure, you need to uncomment the <code class="docutils literal notranslate"><span class="pre">display</span></code> command in the last cell).
+The notebook is written without much in the way of Markdown descriptions; this is to avoid extraneous Markdown text in the <a class="reference external" href="https://github.com/oschuett/appmode">appmode</a> rendering.</p>
+<p>The notebook can be used as a template to make your own similar notebooks.
+To do that, use the following steps:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Download the notebook by <a class="reference download internal" download="" href="_downloads/2c2528db1ce8c8f7a1766010dacf38ef/flu_sera_map.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">clicking</span> <span class="pre">here</span></code></a>.</p></li>
+<li><p>Re-configure the notebook to analyze your data.
+The configuration is specified by the <em>parameters</em> cell that is the third code cell in the notebook.
+For instance, this cell specifies that the notebook is currently configured to analyze the data in a file called <code class="docutils literal notranslate"><span class="pre">data/Lee_serum_mapping.csv</span></code> (<a class="reference download internal" download="" href="_downloads/c70cb3110ae628c1fb70fbc9d315fca8/Lee_serum_mapping.csv"><code class="xref download docutils literal notranslate"><span class="pre">click</span> <span class="pre">here</span></code></a> to look at this file).
+It also specifies information about which columns in this CSV file to plot, the PDB to use, etc.
+Note also that this cell is tagged as a <em>parameters</em> cell, meaning that you can use <a class="reference external" href="https://papermill.readthedocs.io">papermill parameterization</a>.</p></li>
+<li><p>To enable your new notebook to be opened in <a class="reference external" href="https://mybinder.org/">mybinder</a>, you need to put it in a GitHub repo that contains a <code class="docutils literal notranslate"><span class="pre">./binder/</span></code> subdirectory with the <a class="reference external" href="https://mybinder.readthedocs.io/en/latest/config_files.html">binder configuration</a>.
+You can copy the binder configuration for this example from <a class="reference external" href="https://github.com/jbloomlab/dms_struct/tree/master/binder">here</a>.</p></li>
+<li><p>To create a link to an interactive version of your notebook, follow the instructions on the <a class="reference external" href="https://mybinder.org/">mybinder</a> page.
+For instance, the link for this example is <a class="reference external" href="https://mybinder.org/v2/gh/jbloomlab/dms_struct/master?filepath=notebooks/flu_sera_map.ipynb">https://mybinder.org/v2/gh/jbloomlab/dms_struct/master?filepath=notebooks/flu_sera_map.ipynb</a>.
+To make the link open in <a class="reference external" href="https://github.com/oschuett/appmode">appmode</a> (useful if you just want to share the interactive visualization), replace the <code class="docutils literal notranslate"><span class="pre">filepath=</span></code> with <code class="docutils literal notranslate"><span class="pre">urlpath=%2Fapps%2F</span></code> in the above weblink <a class="reference external" href="https://github.com/oschuett/appmode/issues/13">as described here</a>.
+For this example, the link is therefore <a class="reference external" href="https://mybinder.org/v2/gh/jbloomlab/dms_struct/master?urlpath=%2Fapps%2Fnotebooks/flu_sera_map.ipynb">https://mybinder.org/v2/gh/jbloomlab/dms_struct/master?urlpath=%2Fapps%2Fnotebooks/flu_sera_map.ipynb</a>.</p></li>
+</ol>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="index.html">
+    <img class="logo" src="_static/BloomLogo.jpg" alt="Logo"/>
+    
+    <h1 class="logo logo-name">dms_struct</h1>
+    
+  </a>
+</p>
+
+
+
+<p class="blurb">Visualize deep mutational scanning on protein structure.</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=jbloomlab&repo=dms_struct&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+    
+
+<p>
+<a href="https://travis-ci.org/jbloomlab/dms_struct">
+    <img
+        alt="https://secure.travis-ci.org/jbloomlab/dms_struct.svg?branch=master"
+        src="https://secure.travis-ci.org/jbloomlab/dms_struct.svg?branch=master"
+    />
+</a>
+</p>
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">dms_struct documentation</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-run-the-examples">How to run the examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creating-structure-widgets">Creating structure widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#interactive-visualization-and-static-image-of-mutational-antigenic-profiling-data">Interactive visualization and static image of mutational antigenic profiling data</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dms_struct.html">dms_struct package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="package_index.html">package index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="acknowledgments.html">Acknowledgements</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="installation.html" title="previous chapter">Installation</a></li>
+      <li>Next: <a href="dms_struct.html" title="next chapter">dms_struct package</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019--2019.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.0.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/examples.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+    <a href="https://github.com/jbloomlab/dms_struct" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

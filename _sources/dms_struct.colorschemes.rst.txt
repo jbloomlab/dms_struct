@@ -1,0 +1,4 @@
+.. automodule:: dms_struct.colorschemes
+    :members:
+    :undoc-members:
+    :show-inheritance:

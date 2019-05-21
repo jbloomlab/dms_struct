@@ -1,8 +1,0 @@
-# Defines good PDB structure orientations as obtained
-# from the `_camera_orientation` attribute of the
-# nglview structure widgets.
-
-4o5n: [113.5, 44.09, 180.08, 0,
-       -185.38, 23.99, 110.97, 0,
-       2.63, -211.51, 50.12, 0,
-       -34.66, 25.44, 46.9, 1]

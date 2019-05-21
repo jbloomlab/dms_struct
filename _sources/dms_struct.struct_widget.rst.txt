@@ -1,0 +1,4 @@
+.. automodule:: dms_struct.struct_widget
+    :members:
+    :undoc-members:
+    :show-inheritance:

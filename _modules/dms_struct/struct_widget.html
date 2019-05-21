@@ -1,0 +1,299 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>dms_struct.struct_widget &#8212; dms_struct 0.1.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for dms_struct.struct_widget</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">==============</span>
+<span class="sd">struct_widget</span>
+<span class="sd">==============</span>
+
+<span class="sd">Get `nglview &lt;https://github.com/arose/nglview&gt;`_ protein structure widgets.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">secrets</span>
+<span class="kn">from</span> <span class="nn">urllib.error</span> <span class="k">import</span> <span class="n">HTTPError</span>
+
+<span class="kn">import</span> <span class="nn">nglview</span>
+
+
+<div class="viewcode-block" id="colored_struct"><a class="viewcode-back" href="../../dms_struct.struct_widget.html#dms_struct.struct_widget.colored_struct">[docs]</a><span class="k">def</span> <span class="nf">colored_struct</span><span class="p">(</span><span class="o">*</span><span class="p">,</span>
+                   <span class="n">pdb</span><span class="p">,</span>
+                   <span class="n">prop_df</span><span class="p">,</span>
+                   <span class="n">chain_col</span><span class="o">=</span><span class="s1">&#39;chain&#39;</span><span class="p">,</span>
+                   <span class="n">site_col</span><span class="o">=</span><span class="s1">&#39;site&#39;</span><span class="p">,</span>
+                   <span class="n">color_col</span><span class="o">=</span><span class="s1">&#39;color&#39;</span><span class="p">,</span>
+                   <span class="n">representation</span><span class="o">=</span><span class="s1">&#39;cartoon&#39;</span><span class="p">,</span>
+                   <span class="n">highlight_col</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                   <span class="n">highlight_representation</span><span class="o">=</span><span class="s1">&#39;spacefill&#39;</span><span class="p">,</span>
+                   <span class="n">show_other</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                   <span class="n">other_color</span><span class="o">=</span><span class="s1">&#39;#FFFFFF&#39;</span><span class="p">,</span>
+                   <span class="n">orientation</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                   <span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create widget showing a colored structure.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ------------</span>
+<span class="sd">    pdb : str</span>
+<span class="sd">        Existing PDB file, or ID to be downloaded from PDB.</span>
+<span class="sd">    prop_df : pandas DataFrame</span>
+<span class="sd">        Data on sites to show and how to color them. You are responsible for</span>
+<span class="sd">        ensuring that chaing / site labels are consistent with those in `pdb`,</span>
+<span class="sd">        no automatic checks of this are performed.</span>
+<span class="sd">    chain_col: str</span>
+<span class="sd">        Column in `prop_df` with PDB chain ID.</span>
+<span class="sd">    site_col : str</span>
+<span class="sd">        Column in `prop_df` with PDB site numbers.</span>
+<span class="sd">    color_col : str</span>
+<span class="sd">        Column in `prop_df` with color for each site.</span>
+<span class="sd">    representation : str</span>
+<span class="sd">        Protein representation (e.g., &#39;cartoon&#39;, &#39;surface&#39;, &#39;spacefill&#39;,</span>
+<span class="sd">        or other `nglview &lt;https://github.com/arose/nglview&gt;`_ representation.</span>
+<span class="sd">    highlight_col : str or `None`</span>
+<span class="sd">        Optional column of boolean values in `prop_df` indicating</span>
+<span class="sd">        sites to also draw in `highlight_representation`.</span>
+<span class="sd">    highlight_representation : str</span>
+<span class="sd">        Additional representation for sites specified in `highlight_col`.</span>
+<span class="sd">    show_other : `False` or str</span>
+<span class="sd">        Show selections **not** listed as sites in `prop_df`? If so, specify</span>
+<span class="sd">        those selections. Can be &#39;all&#39;, &#39;protein&#39;, or other selection string</span>
+<span class="sd">        (`see here &lt;https://github.com/arose/ngl/tree/master/doc/usage&gt;`_).</span>
+<span class="sd">    other_color : str</span>
+<span class="sd">        Color for any sites not in `prop_df` but shown via `show_other`.</span>
+<span class="sd">    orientation : `None` or list of 16 numbers</span>
+<span class="sd">        Orientation to show the structure, can be obtained via the</span>
+<span class="sd">        `_camera_orientation` property of a structure widget</span>
+<span class="sd">        (https://github.com/arose/nglview/issues/785#issuecomment-487409212).</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    --------</span>
+<span class="sd">    nglview.widget.NGLWidget</span>
+<span class="sd">        The widget can be shown in a Jupyter notebook.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># error checking on `prop_df` and its columns</span>
+    <span class="n">cols</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">colname</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">optional</span> <span class="ow">in</span> <span class="p">[(</span><span class="s1">&#39;color_col&#39;</span><span class="p">,</span> <span class="n">color_col</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+                                   <span class="p">(</span><span class="s1">&#39;site_col&#39;</span><span class="p">,</span> <span class="n">site_col</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+                                   <span class="p">(</span><span class="s1">&#39;chain_col&#39;</span><span class="p">,</span> <span class="n">chain_col</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+                                   <span class="p">(</span><span class="s1">&#39;highlight_col&#39;</span><span class="p">,</span> <span class="n">highlight_col</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+                                   <span class="p">]:</span>
+        <span class="k">if</span> <span class="n">col</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">optional</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;must specify `</span><span class="si">{colname}</span><span class="s2">`&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">col</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">prop_df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;`prop_df` lacks `</span><span class="si">{colname}</span><span class="s2">` of </span><span class="si">{col}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">cols</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;duplicate column names of </span><span class="si">{col}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">cols</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+
+    <span class="n">prop_df</span> <span class="o">=</span> <span class="p">(</span><span class="n">prop_df</span>
+               <span class="p">[</span><span class="n">cols</span><span class="p">]</span>
+               <span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
+               <span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">prop_df</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">prop_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="n">chain_col</span><span class="p">,</span> <span class="n">site_col</span><span class="p">])):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Inconsistent duplicated rows for some sites in &#39;</span>
+                         <span class="s1">&#39;`prop_df`. For each chain and site, entries must &#39;</span>
+                         <span class="n">f</span><span class="s2">&quot;be the same for all rows in these columns: </span><span class="si">{cols}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># get PDB into a widget; use `default_representation=False` as here:</span>
+    <span class="c1"># https://github.com/arose/nglview/issues/802#issuecomment-492760630</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">pdb</span><span class="p">):</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="n">nglview</span><span class="o">.</span><span class="n">show_structure_file</span><span class="p">(</span><span class="n">pdb</span><span class="p">,</span>
+                                        <span class="n">default_representation</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                        <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">w</span> <span class="o">=</span> <span class="n">nglview</span><span class="o">.</span><span class="n">show_pdbid</span><span class="p">(</span><span class="n">pdb</span><span class="p">,</span>
+                                   <span class="n">default_representation</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                   <span class="p">)</span>
+        <span class="k">except</span> <span class="n">HTTPError</span><span class="p">:</span>  <span class="c1"># noqa: F821</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;`pdb` </span><span class="si">{pdb}</span><span class="s2"> does not specify an existing &quot;</span>
+                             <span class="s1">&#39;PDB file or an ID that can be downloaded&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Set up color schemes as here:</span>
+    <span class="c1"># https://github.com/arose/nglview/pull/755</span>
+    <span class="c1"># For details on selection strings, see here:</span>
+    <span class="c1"># https://github.com/arose/ngl/blob/master/doc/usage/selection-language.md</span>
+    <span class="n">colorscheme</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">selectionlist</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">highlight_colorscheme</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">highlight_selectionlist</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">prop_df</span><span class="o">.</span><span class="n">itertuples</span><span class="p">():</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">color_col</span><span class="p">)</span>
+        <span class="n">sel_str</span> <span class="o">=</span> <span class="n">f</span><span class="s2">&quot;:{getattr(row, chain_col)} and {getattr(row, site_col)}&quot;</span>
+        <span class="n">selectionlist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;(</span><span class="si">{sel_str}</span><span class="s2">)&quot;</span><span class="p">)</span>
+        <span class="n">colorscheme</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">color</span><span class="p">,</span> <span class="n">sel_str</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">highlight_col</span> <span class="ow">and</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">highlight_col</span><span class="p">):</span>
+            <span class="n">highlight_selectionlist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;(</span><span class="si">{sel_str}</span><span class="s2">)&quot;</span><span class="p">)</span>
+            <span class="n">highlight_colorscheme</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">color</span><span class="p">,</span> <span class="n">sel_str</span><span class="p">])</span>
+    <span class="n">colorscheme</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">other_color</span><span class="p">,</span> <span class="s1">&#39;*&#39;</span><span class="p">])</span>
+
+    <span class="n">selection</span> <span class="o">=</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">selectionlist</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">show_other</span><span class="p">:</span>
+        <span class="n">selection</span> <span class="o">=</span> <span class="n">f</span><span class="s2">&quot;(</span><span class="si">{show_other}</span><span class="s2">) or (</span><span class="si">{selection}</span><span class="s2">)&quot;</span>
+    <span class="c1"># uniquely label color schemes as here:</span>
+    <span class="c1"># https://github.com/arose/nglview/issues/802#issuecomment-492501051</span>
+    <span class="n">colorscheme</span> <span class="o">=</span> <span class="n">nglview</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">_ColorScheme</span><span class="p">(</span>
+                                <span class="n">colorscheme</span><span class="p">,</span>
+                                <span class="n">label</span><span class="o">=</span><span class="n">f</span><span class="s2">&quot;colorscheme_{secrets.token_hex(10)}&quot;</span><span class="p">,</span>
+                                <span class="p">)</span>
+    <span class="n">highlight_selection</span> <span class="o">=</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">highlight_selectionlist</span><span class="p">)</span>
+    <span class="n">highlight_colorscheme</span> <span class="o">=</span> <span class="n">nglview</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">_ColorScheme</span><span class="p">(</span>
+                                <span class="n">highlight_colorscheme</span><span class="p">,</span>
+                                <span class="n">label</span><span class="o">=</span><span class="n">f</span><span class="s2">&quot;colorscheme_{secrets.token_hex(10)}&quot;</span><span class="p">,</span>
+                                <span class="p">)</span>
+
+    <span class="c1"># color and style widget; set assembly to BU1 (biological unit 1) as here:</span>
+    <span class="c1"># https://github.com/arose/ngl/blob/master/doc/usage/selection-language.md</span>
+    <span class="n">w</span><span class="o">.</span><span class="n">clear_representations</span><span class="p">()</span>
+    <span class="n">w</span><span class="o">.</span><span class="n">add_representation</span><span class="p">(</span><span class="n">representation</span><span class="p">,</span>
+                         <span class="n">selection</span><span class="o">=</span><span class="n">selection</span><span class="p">,</span>
+                         <span class="n">color</span><span class="o">=</span><span class="n">colorscheme</span><span class="p">,</span>
+                         <span class="n">assembly</span><span class="o">=</span><span class="s1">&#39;BU1&#39;</span><span class="p">,</span>
+                         <span class="p">)</span>
+    <span class="k">if</span> <span class="n">highlight_representation</span> <span class="ow">and</span> <span class="n">highlight_selection</span><span class="p">:</span>
+        <span class="n">w</span><span class="o">.</span><span class="n">add_representation</span><span class="p">(</span><span class="n">highlight_representation</span><span class="p">,</span>
+                             <span class="n">selection</span><span class="o">=</span><span class="n">highlight_selection</span><span class="p">,</span>
+                             <span class="n">color</span><span class="o">=</span><span class="n">highlight_colorscheme</span><span class="p">,</span>
+                             <span class="n">assembly</span><span class="o">=</span><span class="s1">&#39;BU1&#39;</span><span class="p">,</span>
+                             <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">orientation</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">orientation</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">16</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;`orientation` not list of 16 numbers&#39;</span><span class="p">)</span>
+        <span class="n">w</span><span class="o">.</span><span class="n">_set_camera_orientation</span><span class="p">(</span><span class="n">orientation</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">w</span></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">doctest</span>
+    <span class="n">doctest</span><span class="o">.</span><span class="n">testmod</span><span class="p">()</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../../index.html">
+    <img class="logo" src="../../_static/BloomLogo.jpg" alt="Logo"/>
+    
+    <h1 class="logo logo-name">dms_struct</h1>
+    
+  </a>
+</p>
+
+
+
+<p class="blurb">Visualize deep mutational scanning on protein structure.</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=jbloomlab&repo=dms_struct&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+    
+
+<p>
+<a href="https://travis-ci.org/jbloomlab/dms_struct">
+    <img
+        alt="https://secure.travis-ci.org/jbloomlab/dms_struct.svg?branch=master"
+        src="https://secure.travis-ci.org/jbloomlab/dms_struct.svg?branch=master"
+    />
+</a>
+</p>
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">dms_struct documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dms_struct.html">dms_struct package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../package_index.html">package index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../acknowledgments.html">Acknowledgements</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019--2019.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.0.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+    </div>
+
+    
+    <a href="https://github.com/jbloomlab/dms_struct" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>
