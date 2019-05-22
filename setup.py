@@ -46,7 +46,7 @@ setup(
     install_requires=[
                       'dmslogo>=0.2.3',
                       'matplotlib>=3.0.2',
-                      'nglview>=2.0',
+                      'nglview>=2.1',
                       'numpy>=1.15.4',
                       'pandas>=0.24.2',
                       'pyyaml>=4.2b1',
