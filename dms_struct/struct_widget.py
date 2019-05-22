@@ -43,9 +43,10 @@ def colored_struct(*,
         Column in `prop_df` with PDB site numbers.
     color_col : str
         Column in `prop_df` with color for each site.
-    representation : str
+    representation : str or list
         Protein representation (e.g., 'cartoon', 'surface', 'spacefill',
-        or other `nglview <https://github.com/arose/nglview>`_ representation.
+        or other `nglview <https://github.com/arose/nglview>`_ representation;
+        or a list of such representations.
     highlight_col : str or `None`
         Optional column of boolean values in `prop_df` indicating
         sites to also draw in `highlight_representation`.
@@ -146,11 +147,14 @@ def colored_struct(*,
     # color and style widget; set assembly to BU1 (biological unit 1) as here:
     # https://github.com/arose/ngl/blob/master/doc/usage/selection-language.md
     w.clear_representations()
-    w.add_representation(representation,
-                         selection=selection,
-                         color=colorscheme,
-                         assembly='BU1',
-                         )
+    if isinstance(representation, str):
+        representation = [representation]
+    for r in representation:
+        w.add_representation(r,
+                             selection=selection,
+                             color=colorscheme,
+                             assembly='BU1',
+                             )
     if highlight_representation and highlight_selection:
         w.add_representation(highlight_representation,
                              selection=highlight_selection,
