@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>struct_widget &#8212; dms_struct 0.1.0 documentation</title>
+    <title>struct_widget &#8212; dms_struct 0.2.0 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -47,8 +47,9 @@ no automatic checks of this are performed.</p></li>
 <li><p><strong>chain_col</strong> (<em>str</em>) – Column in <cite>prop_df</cite> with PDB chain ID.</p></li>
 <li><p><strong>site_col</strong> (<em>str</em>) – Column in <cite>prop_df</cite> with PDB site numbers.</p></li>
 <li><p><strong>color_col</strong> (<em>str</em>) – Column in <cite>prop_df</cite> with color for each site.</p></li>
-<li><p><strong>representation</strong> (<em>str</em>) – <p>Protein representation (e.g., ‘cartoon’, ‘surface’, ‘spacefill’,
-or other <a class="reference external" href="https://github.com/arose/nglview">nglview</a> representation.</p>
+<li><p><strong>representation</strong> (<em>str</em><em> or </em><em>list</em>) – <p>Protein representation (e.g., ‘cartoon’, ‘surface’, ‘spacefill’,
+or other <a class="reference external" href="https://github.com/arose/nglview">nglview</a> representation;
+or a list of such representations.</p>
 </p></li>
 <li><p><strong>highlight_col</strong> (str or <cite>None</cite>) – Optional column of boolean values in <cite>prop_df</cite> indicating
 sites to also draw in <cite>highlight_representation</cite>.</p></li>

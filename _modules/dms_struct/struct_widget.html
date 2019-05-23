@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>dms_struct.struct_widget &#8212; dms_struct 0.1.0 documentation</title>
+    <title>dms_struct.struct_widget &#8212; dms_struct 0.2.0 documentation</title>
     <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
@@ -74,9 +74,10 @@
 <span class="sd">        Column in `prop_df` with PDB site numbers.</span>
 <span class="sd">    color_col : str</span>
 <span class="sd">        Column in `prop_df` with color for each site.</span>
-<span class="sd">    representation : str</span>
+<span class="sd">    representation : str or list</span>
 <span class="sd">        Protein representation (e.g., &#39;cartoon&#39;, &#39;surface&#39;, &#39;spacefill&#39;,</span>
-<span class="sd">        or other `nglview &lt;https://github.com/arose/nglview&gt;`_ representation.</span>
+<span class="sd">        or other `nglview &lt;https://github.com/arose/nglview&gt;`_ representation;</span>
+<span class="sd">        or a list of such representations.</span>
 <span class="sd">    highlight_col : str or `None`</span>
 <span class="sd">        Optional column of boolean values in `prop_df` indicating</span>
 <span class="sd">        sites to also draw in `highlight_representation`.</span>
@@ -177,11 +178,14 @@
     <span class="c1"># color and style widget; set assembly to BU1 (biological unit 1) as here:</span>
     <span class="c1"># https://github.com/arose/ngl/blob/master/doc/usage/selection-language.md</span>
     <span class="n">w</span><span class="o">.</span><span class="n">clear_representations</span><span class="p">()</span>
-    <span class="n">w</span><span class="o">.</span><span class="n">add_representation</span><span class="p">(</span><span class="n">representation</span><span class="p">,</span>
-                         <span class="n">selection</span><span class="o">=</span><span class="n">selection</span><span class="p">,</span>
-                         <span class="n">color</span><span class="o">=</span><span class="n">colorscheme</span><span class="p">,</span>
-                         <span class="n">assembly</span><span class="o">=</span><span class="s1">&#39;BU1&#39;</span><span class="p">,</span>
-                         <span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">representation</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">representation</span> <span class="o">=</span> <span class="p">[</span><span class="n">representation</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">representation</span><span class="p">:</span>
+        <span class="n">w</span><span class="o">.</span><span class="n">add_representation</span><span class="p">(</span><span class="n">r</span><span class="p">,</span>
+                             <span class="n">selection</span><span class="o">=</span><span class="n">selection</span><span class="p">,</span>
+                             <span class="n">color</span><span class="o">=</span><span class="n">colorscheme</span><span class="p">,</span>
+                             <span class="n">assembly</span><span class="o">=</span><span class="s1">&#39;BU1&#39;</span><span class="p">,</span>
+                             <span class="p">)</span>
     <span class="k">if</span> <span class="n">highlight_representation</span> <span class="ow">and</span> <span class="n">highlight_selection</span><span class="p">:</span>
         <span class="n">w</span><span class="o">.</span><span class="n">add_representation</span><span class="p">(</span><span class="n">highlight_representation</span><span class="p">,</span>
                              <span class="n">selection</span><span class="o">=</span><span class="n">highlight_selection</span><span class="p">,</span>

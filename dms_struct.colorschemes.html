@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>colorschemes &#8212; dms_struct 0.1.0 documentation</title>
+    <title>colorschemes &#8212; dms_struct 0.2.0 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -155,7 +155,7 @@ by providing <cite>palettable.sequential.cmocean.Dense_20.mpl_colormap</cite>.</
 </div>
 <dl class="method">
 <dt id="dms_struct.colorschemes.ValueToColorMap.scale_bar">
-<code class="descname">scale_bar</code><span class="sig-paren">(</span><em>*</em>, <em>orientation='vertical'</em>, <em>ax=None</em>, <em>label=None</em>, <em>axisfontscale=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dms_struct/colorschemes.html#ValueToColorMap.scale_bar"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dms_struct.colorschemes.ValueToColorMap.scale_bar" title="Permalink to this definition">¶</a></dt>
+<code class="descname">scale_bar</code><span class="sig-paren">(</span><em>*</em>, <em>orientation='vertical'</em>, <em>ax=None</em>, <em>label=None</em>, <em>axisfontscale=1</em>, <em>low_high_ticks_only=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dms_struct/colorschemes.html#ValueToColorMap.scale_bar"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dms_struct.colorschemes.ValueToColorMap.scale_bar" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draw a scale bar for the value-to-color map.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -165,6 +165,7 @@ by providing <cite>palettable.sequential.cmocean.Dense_20.mpl_colormap</cite>.</
 new axes.</p></li>
 <li><p><strong>label</strong> (<em>None</em><em> or </em><em>str</em>) – Label for scale bar.</p></li>
 <li><p><strong>axisfontscale</strong> (<em>float</em>) – Scale font size by this much.</p></li>
+<li><p><strong>low_high_ticks_only</strong> (<em>bool</em>) – Rather than showing numerical ticks, just indicate low and high.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
