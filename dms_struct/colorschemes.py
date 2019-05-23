@@ -189,6 +189,7 @@ class ValueToColorMap:
                   ax=None,
                   label=None,
                   axisfontscale=1,
+                  low_high_ticks_only=False,
                   ):
         """Draw a scale bar for the value-to-color map.
 
@@ -203,6 +204,8 @@ class ValueToColorMap:
             Label for scale bar.
         axisfontscale : float
             Scale font size by this much.
+        low_high_ticks_only : bool
+            Rather than showing numerical ticks, just indicate low and high.
 
         Returns
         -------
@@ -238,15 +241,37 @@ class ValueToColorMap:
             elif orientation == 'horizontal':
                 ax.set_xlabel(label, fontsize=17 * axisfontscale)
 
-        ax.tick_params(axis='both', labelsize=12 * axisfontscale)
-        ax.tick_params(axis={'vertical': 'x', 'horizontal': 'y'}[orientation],
-                       left=False,
-                       right=False,
-                       bottom=False,
-                       top=False,
-                       labelbottom=False,
-                       labelleft=False,
-                       )
+        if low_high_ticks_only:
+            ax.tick_params('both',
+                           top=False,
+                           bottom=False,
+                           left=False,
+                           right=False,
+                           labelbottom=(orientation == 'horizontal'),
+                           labelleft=(orientation == 'vertical'),
+                           )
+            axtype = {'vertical': 'y', 'horizontal': 'x'}[orientation]
+            axis = getattr(ax, axtype + 'axis')
+            dtick = (self.maxvalue - self.minvalue) * 0.1
+            axis.set_ticks([self.minvalue + dtick, self.maxvalue - dtick])
+            axis.set_ticklabels(
+                    ['low', 'high'],
+                    rotation=orientation,
+                    verticalalignment={'vertical': 'center',
+                                       'horizontal': 'top'}[orientation],
+                    )
+            ax.tick_params(axis=axtype, labelsize=12 * axisfontscale)
+        else:
+            ax.tick_params(axis='both', labelsize=12 * axisfontscale)
+            ax.tick_params(axis={'vertical': 'x',
+                                 'horizontal': 'y'}[orientation],
+                           left=False,
+                           right=False,
+                           bottom=False,
+                           top=False,
+                           labelbottom=False,
+                           labelleft=False,
+                           )
 
         return ax.get_figure(), ax
 
